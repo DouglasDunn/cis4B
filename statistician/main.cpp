@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cassert>
 
 using namespace std;
 
@@ -20,7 +21,7 @@ public:
     double getMean() const;
     double getSmallest() const;
     double getLargest() const;
-
+    void erase();
 };
 
 Statistician::Statistician() {
@@ -55,22 +56,29 @@ int Statistician::getLength() const {
 }
 
 double Statistician::getLast() const {
+    assert(count != 0);
     return last;
 }
 
 double Statistician::getMean() const {
+    assert(count != 0);
     return sum / count;
 }
 
 double Statistician::getSmallest() const {
+    assert(count != 0);
     return smallest;
 }
 
 double Statistician::getLargest() const {
+    assert(count != 0);
     return largest;
 }
 
-// assert(length!=0) is the precondition. Have to include the cassert library
+void Statistician::erase() {
+    count = 0;
+    sum = 0;
+}
 
 int main() {
     Statistician s;
@@ -78,12 +86,15 @@ int main() {
     s.next_number(1.2);
     s.next_number(4.2);
     s.next_number(3.2);
-    // 10.8
-    cout << s.getSum() << endl;
-    cout << s.getLength() << endl;
-    cout << s.getLast() << endl;
-    cout << s.getMean() << endl; // 2.7
-    cout << s.getSmallest() << endl;
-    cout << s.getLargest() << endl;
+    cout << "The sum is: " << s.getSum() << endl;
+    cout << "The length is: " << s.getLength() << endl;
+    cout << "The last number is: " << s.getLast() << endl;
+    cout << "The mean is: " << s.getMean() << endl;
+    cout << "The smallest is: " << s.getSmallest() << endl;
+    cout << "The largest is: " << s.getLargest() << endl;
+    s.erase();
+    cout << "After the erase." << endl;
+    cout << "The sum is: " << s.getSum() << endl;
+    cout << "The length is: " << s.getLength() << endl;
     return 0;
 }

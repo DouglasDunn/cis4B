@@ -6,7 +6,9 @@
 
 #IncludeRegexTransform: 
 
-/Users/douglasdunn/CLionProjects/statistician/main.cpp
+/Users/douglasdunn/CLionProjects/cis4B/statistician/main.cpp
 iostream
+-
+cassert
 -
 
