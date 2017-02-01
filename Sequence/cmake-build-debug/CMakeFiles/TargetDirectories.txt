@@ -1,0 +1,3 @@
+/Users/douglasdunn/CLionProjects/cis4B/Sequence/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/douglasdunn/CLionProjects/cis4B/Sequence/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/Users/douglasdunn/CLionProjects/cis4B/Sequence/cmake-build-debug/CMakeFiles/Sequence.dir
