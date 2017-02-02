@@ -9,4 +9,6 @@
 /Users/douglasdunn/CLionProjects/cis4B/Sequence/main.cpp
 iostream
 -
+cassert
+-
 
