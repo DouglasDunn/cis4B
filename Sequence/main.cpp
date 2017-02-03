@@ -19,6 +19,8 @@ public:
     double current() const;
     //function I created
     void printItems();
+    void printCurrentIndex();
+    void printUsed();
 
 private:
     double data[CAPACITY];
@@ -32,6 +34,7 @@ Sequence::Sequence() {
     used = 0;
 }
 
+//put current index at the beginning
 void Sequence::start() {
     current_index = 0;
 }
@@ -42,6 +45,7 @@ void Sequence::advance() {
     current_index++;
 }
 
+// inserts an item to where the current_index is at
 void Sequence::insert(const double &entry) {
     // checks size of the bag is less than the CAPACITY(30). If greater, throw an error
     assert(size() < CAPACITY);
@@ -66,25 +70,27 @@ void Sequence::attach(const double &entry) {
     // check if the size of the bag is less than the capacity, if greater, throw an error
     assert(size() < CAPACITY);
 
+    // i dont know what this does yet
     if (!is_item()) {
-        data[used - 1] == entry;
+        data[used - 1] = entry;
+        return;
     }
 
-    for (int i = used; i > current_index; i--) {
-        data[i] = data[i + 1];
+    for (int i = used; i > current_index ; i--) {
+        data[i + 1] = data[i];
     }
 
-    data[current_index] = entry;
+    data[++current_index] = entry;
     used++;
 }
 
 void Sequence::remove_current() {
     assert(is_item());
 
-    for (int i = current_index + 1; i < used - 1; i++) {
+    for (int i = current_index; i < used; i++) {
         data[i] = data[i + 1];
-        used--;
     }
+    used--;
 }
 
 int Sequence::size() const {
@@ -110,24 +116,40 @@ void Sequence::printItems() {
     }
 }
 
+void Sequence::printCurrentIndex() {
+    cout << endl << "current index: " << current_index << endl;
+}
+
+void Sequence::printUsed() {
+    cout << endl << "used: " << used << endl;
+}
+
 int main() {
     Sequence bag;
 
-    bag.attach(.2);
     bag.insert(1);
     bag.insert(2);
-    cout << bag.current() << endl;
     bag.insert(3);
-    bag.insert(4);
-    bag.insert(5);
-    bag.start( );
-    cout << bag.current() << endl;
-    bag.attach(4.5);
     cout << bag.current() << endl;
     bag.advance();
     cout << bag.current() << endl;
     bag.advance();
     cout << bag.current() << endl;
     bag.printItems();
+    bag.printCurrentIndex();
+    bag.insert(4);
+    bag.printItems();
+    bag.remove_current();
+    bag.printItems();
+    bag.printCurrentIndex();
+    bag.printUsed();
+    bag.insert(5);
+    bag.printItems();
+    bag.printCurrentIndex();
+    bag.printUsed();
+    bag.attach(6);
+    bag.printItems();
+    bag.printCurrentIndex();
+    bag.printUsed();
     return 0;
 }
