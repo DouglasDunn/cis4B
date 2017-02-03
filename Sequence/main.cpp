@@ -21,6 +21,14 @@ public:
     void printItems();
     void printCurrentIndex();
     void printUsed();
+    //Homework 2 methods to be added
+    void addFront(const double &entry);
+    double removeFront();
+    void addEnd(const double &entry);
+    void makeCurrentLastItem();
+    //operator overloading methods
+    Sequence operator+(Sequence &sequence);
+    Sequence operator+=(Sequence &sequence);
 
 private:
     double data[CAPACITY];
@@ -124,6 +132,55 @@ void Sequence::printUsed() {
     cout << endl << "used: " << used << endl;
 }
 
+//Homework 2 methods to be added
+void Sequence::addFront(const double &entry) {
+    for (int i = used - 1; i >= 0; i--) {
+        data[i + 1] = data[i];
+    }
+
+    data[0] = entry;
+    used++;
+}
+
+double Sequence::removeFront() {
+    double dataRemoved = data[0];
+
+    for (int i = 0; i < used; i++) {
+        data[i] = data[i + 1];
+    }
+
+    used--;
+    return dataRemoved;
+}
+
+void Sequence::addEnd(const double &entry) {
+    data[used++] = entry;
+}
+
+void Sequence::makeCurrentLastItem() {
+    current_index = used - 1;
+}
+
+Sequence Sequence::operator+(Sequence &sequence) {
+    Sequence brandNew;
+
+    for (int i = 0; i < used; i++) {
+        brandNew.addEnd(data[i]);
+    }
+
+    for (int i = 0; i < sequence.used; i++) {
+        brandNew.addEnd(sequence.data[i]);
+    }
+
+    return brandNew;
+}
+
+Sequence Sequence::operator+=(Sequence &sequence) {
+    for (int i = 0; i < sequence.used; i++) {
+        addEnd(sequence.data[i]);
+    }
+}
+
 int main() {
     Sequence bag;
 
@@ -148,6 +205,40 @@ int main() {
     bag.printCurrentIndex();
     bag.printUsed();
     bag.attach(6);
+    bag.printItems();
+    bag.printCurrentIndex();
+    bag.printUsed();
+    bag.addFront(7);
+    bag.printItems();
+    bag.printCurrentIndex();
+    bag.printUsed();
+    bag.removeFront();
+    bag.printItems();
+    bag.printCurrentIndex();
+    bag.printUsed();
+    bag.addEnd(8);
+    bag.printItems();
+    bag.printCurrentIndex();
+    bag.printUsed();
+    bag.makeCurrentLastItem();
+    bag.printItems();
+    bag.printCurrentIndex();
+    bag.printUsed();
+
+    Sequence bag2;
+    bag2.addEnd(9);
+    bag2.addEnd(10);
+    bag2.addEnd(11);
+    bag2.addEnd(12);
+    bag2.printItems();
+
+    Sequence bag3 = bag + bag2;
+    bag3.printItems();
+    bag3.printCurrentIndex();
+    bag3.printUsed();
+
+    bag += bag2;
+
     bag.printItems();
     bag.printCurrentIndex();
     bag.printUsed();
